@@ -70,17 +70,90 @@ OUTSIDE_TEMP_PROFILE = {
 def month_name_fr(m: int) -> str:
     return ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"][m-1]
 
+REAL_PRODUCTS = {
+    "Parfum": [
+        ("Chanel No.5", "Chanel"),
+        ("Dior Sauvage", "Dior"),
+        ("Gucci Bloom", "Gucci"),
+        ("Yves Saint Laurent Libre", "YSL"),
+        ("Tom Ford Black Orchid", "Tom Ford"),
+        ("Jo Malone Peony & Blush Suede", "Jo Malone")
+    ],
+    "Shampooing": [
+        ("Head & Shoulders Classic", "Procter & Gamble"),
+        ("L'Oréal Elvive", "L'Oréal"),
+        ("Dove Daily Moisture", "Dove"),
+        ("Pantene Repair & Protect", "Pantene"),
+        ("Herbal Essences Bio:Renew", "Herbal Essences"),
+        ("Bumble and Bumble Hairdresser's Invisible Oil", "Bumble and Bumble")
+    ],
+    "Crème": [
+        ("Nivea Soft Moisturizing Cream", "Nivea"),
+        ("La Roche-Posay Toleriane Ultra", "La Roche-Posay"),
+        ("Clinique Moisture Surge", "Clinique"),
+        ("Neutrogena Hydro Boost", "Neutrogena"),
+        ("Eucerin Advanced Repair", "Eucerin"),
+        ("Aveeno Daily Moisturizing", "Aveeno")
+    ],
+    "Sérum": [
+        ("Estée Lauder Advanced Night Repair", "Estée Lauder"),
+        ("The Ordinary Hyaluronic Acid", "The Ordinary"),
+        ("L'Oréal Paris Revitalift", "L'Oréal"),
+        ("Kiehl's Midnight Recovery", "Kiehl's"),
+        ("Vichy Mineral 89", "Vichy"),
+        ("Caudalie Vinoperfect", "Caudalie")
+    ],
+    "Déodorant": [
+        ("Dove Original", "Dove"),
+        ("Nivea Men Fresh Active", "Nivea"),
+        ("Old Spice High Endurance", "Old Spice"),
+        ("Rexona Clinical", "Rexona"),
+        ("Secret Aluminum Free", "Secret"),
+        ("Mitchum Clean Control", "Mitchum")
+    ],
+    "Gel Douche": [
+        ("Neutrogena Rainbath", "Neutrogena"),
+        ("Dove Deep Moisture", "Dove"),
+        ("Nivea Creme Soft", "Nivea"),
+        ("L'Oréal Paris Men Expert", "L'Oréal"),
+        ("Irish Spring Original", "Irish Spring"),
+        ("Aveeno Daily Moisturizing", "Aveeno")
+    ]
+}
 
+##def gen_products(n_per_cat: int = 6) -> pd.DataFrame:
+##    rows = []
+##    pid = 1
+##    for cat, meta in PRODUCT_CATEGORIES.items():
+##        for i in range(n_per_cat):
+##            name = f"{cat} {chr(65+i)}"
+##            shelf = meta["shelf_life_days"]
+##            rows.append({
+##                "product_id": pid,
+##                "product_name": name,
+##                "category": cat,
+##                "temp_opt": meta["temp_opt"],
+##                "light_sensitive": meta["light_sensitive"],
+##                "shelf_life_days": shelf,
+##                "unit_volume_l": meta["volume_l"],
+##                "unit_value": np.round(np.random.uniform(8, 80), 2)
+##            })
+##            pid += 1
+##    return pd.DataFrame(rows)
 def gen_products(n_per_cat: int = 6) -> pd.DataFrame:
     rows = []
     pid = 1
     for cat, meta in PRODUCT_CATEGORIES.items():
-        for i in range(n_per_cat):
-            name = f"{cat} {chr(65+i)}"
+        product_list = REAL_PRODUCTS.get(cat, [])
+        # Limit to minimum of available products or n_per_cat
+        count = min(len(product_list), n_per_cat)
+        for i in range(count):
+            name, brand = product_list[i]
             shelf = meta["shelf_life_days"]
             rows.append({
                 "product_id": pid,
                 "product_name": name,
+                "brand": brand,
                 "category": cat,
                 "temp_opt": meta["temp_opt"],
                 "light_sensitive": meta["light_sensitive"],
