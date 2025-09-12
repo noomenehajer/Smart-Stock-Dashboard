@@ -36,7 +36,7 @@ import streamlit as st
 # Configuration & constantes
 # -------------------------------
 st.set_page_config(
-    page_title="SmartCosmeticsStock",
+    page_title="SmartStock",
     page_icon="💄",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -394,7 +394,7 @@ def df_to_csv_download(df: pd.DataFrame, filename: str, label: str):
 # -------------------------------
 import streamlit as st
 
-st.markdown("<h1 style='text-align: center;'>Dashboard Prédictif et Recommandations pour Distribution</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>SmartStock : Dashboard prédictif pour une gestion intelligente</h1>", unsafe_allow_html=True)
 
 #st.title("Dashboard Prédictif et Recommandations pour Distribution")
 
@@ -610,4 +610,4 @@ with tab5:
     )
 
 st.markdown("---")
-st.caption("© 2025 SmartCosmeticsStock — Démo académique (données simulées).")
+st.caption("© 2025 SmartStock — Démo académique (données simulées).")
