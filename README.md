@@ -1,9 +1,9 @@
-🚀 Smart Stock Dashboard
+<h1 align="center">🚀 Smart Stock Dashboard</h1>
 
 An AI-powered intelligent dashboard built with Python, designed for predictive management, monitoring, and energy optimization of inventories.
 This project leverages machine learning, data analysis, and interactive visualizations to provide actionable insights and improve decision-making.
 
-✨ Features
+⚡ Features
 
 📊 Interactive Dashboard – real-time data visualization with dynamic charts
 
